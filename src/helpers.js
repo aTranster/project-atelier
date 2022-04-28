@@ -7,36 +7,39 @@ import config from '/config.js';
 
 const options = {
   headers: {
-    'Authorization': `${config.TOKEN}`
+    'Authorization': `${config.TOKEN}`,
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
   }
 };
 
-const host = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp';
+// const host = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp';
+const host2 = 'http://ec2-54-241-227-92.us-west-1.compute.amazonaws.com';
 
 /*------------------------ PRODUCTS ------------------------ */
 /*------------------------ PRODUCTS ------------------------ */
 /*------------------------ PRODUCTS ------------------------ */
 
 const getProducts = (page = 1, count = 5) => {
-  return axios.get(host + `/products?page=${page}&count=${count}`, options)
+  return axios.get(host2 + `/products?page=${page}&count=${count}`, options)
     .then((res) => res.data)
     .catch((err) => console.error(err));
 };
 
 const getProduct = (product_id) => {
-  return axios.get(host + '/products/' + product_id, options)
+  return axios.get(host2 + '/products/' + product_id, options)
     .then((res) => res.data)
     .catch((err) => console.error(err));
 };
 
 const getStyles = (product_id) => {
-  return axios.get(host + '/products/' + product_id + '/styles', options)
+  return axios.get(host2 + '/products/' + product_id + '/styles', options)
     .then((res) => res.data.results)
     .catch((err) => console.error(err));
 };
 
 const getRelated = (product_id) => {
-  return axios.get(host + '/products/' + product_id + '/related', options)
+  return axios.get(host2 + '/products/' + product_id + '/related', options)
     .then((res) => res.data)
     .catch((err) => console.error(err));
 }

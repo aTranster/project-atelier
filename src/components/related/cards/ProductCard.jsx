@@ -11,10 +11,8 @@ const ProductCard = React.memo(function ProductCard({product_id, related, setPro
   useEffect(() => {
       getProduct(product_id)
       .then((productData) => getStyles(product_id)
-        .then((styleData) => getReviewMetadata(product_id)
-          .then((reviewData) => {
-            setCardData({productData, styleData, reviewData: reviewData.ratings});
-          })))
+        .then((styleData) => setCardData({productData, styleData})
+         ))
       .catch((err) => console.error(err));
   }, [product_id]);
 
@@ -24,7 +22,7 @@ const ProductCard = React.memo(function ProductCard({product_id, related, setPro
     });
   };
 
-  const averageRating = useMemo(() => getAverageRating(cardData.reviewData), [cardData]);
+  // const averageRating = useMemo(() => getAverageRating(cardData.reviewData), [cardData]);
 
   return (
     <div className="product-card" onClick={handleCardClick}>
@@ -44,9 +42,9 @@ const ProductCard = React.memo(function ProductCard({product_id, related, setPro
           </div>) :
           (<section className="body-text price">{cardData.styleData[0].original_price} USD</section>)) : null
         }
-        <div className="average-star-container product-stars">
+        {/* <div className="average-star-container product-stars">
           {averageRating > 0 ? <StarRating averageRating={averageRating} /> : null}
-        </div>
+        </div> */}
       </div>
     </div>
   );

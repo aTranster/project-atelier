@@ -10,21 +10,21 @@ export const AppContext = createContext({});
 
 const App = () => {
 
-  const [productId, setProductId] = useState(40344);
+  const [productId, setProductId] = useState(1);
   const [productData, setProductData] = useState({});
 
   useEffect(() => {
-    getProduct(40344)
+    getProduct(productId)
       .then((response) => setProductData(response));
   }, []);
 
   return (
     <AppContext.Provider value={{productId, setProductId, productData, setProductData}}>
-      <Header />
+      {/* <Header /> */}
       <Overview />
       <ProductCardLists />
-      <Qna />
-      <Ratings />
+      {/* <Qna />
+      <Ratings /> */}
     </AppContext.Provider>
   );
 }
